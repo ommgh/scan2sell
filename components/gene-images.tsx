@@ -1,15 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 export const GenerateImages = () => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [files, setFiles] = useState<String[]>([""]);
+    const [file, setFile] = useState<File>();
     const updateFiles = () => {
-        let nf = inputRef.current?.files as FileList;
-        let ar = [];
-        for (let i = 0; i < nf.length; i++) ar.push(nf[i].name);
-        setFiles(ar);
+        console.log(inputRef.current?.files);
+        let temp = inputRef.current?.files as FileList;
+        let ar = temp[0] as File;
+        setFile(ar);
     };
     return (
         <form
@@ -58,21 +59,22 @@ export const GenerateImages = () => {
                     ref={inputRef}
                     type="file"
                     accept="image/png, image/jpeg, image/jpeg, image/webp"
-                    multiple
                     className="peer hidden"
                     onChange={updateFiles}
                 />
                 <div className="text-2xl font-semibold text-center">
-                    Upload your images
+                    Upload your image
                 </div>
-                {files.map((file) => (
-                    <span>{file}</span>
-                ))}
+                {<span>{file?.name}</span>}
             </label>
 
-            <button className="bg-[#18676d]/20 px-8 py-3 text-xl font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white">
+            <Link
+                href={"/uploadproduct"}
+                onClick={() => file != undefined && saveImageTOAppwrite(file)}
+                className="bg-[#18676d]/20 px-8 py-3 text-xl font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white"
+            >
                 Generate Images
-            </button>
+            </Link>
         </form>
     );
 };
