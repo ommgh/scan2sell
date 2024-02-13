@@ -7,12 +7,12 @@ import { ID, Client, Storage } from "appwrite";
 const saveImageToAppwrite = (image: File) => {
     const client = new Client();
     client.setEndpoint('https://cloud.appwrite.io/v1');
-    client.setProject('65c7525d9e76600783a5');
+    client.setProject('ProjectID');
 
     const storage = new Storage(client);
     try {
         const promise = storage.createFile(
-            '65c752846c06609469f5',
+            '#StorageId',
             ID.unique(),
             image // Pass the file data as an object
         );
