@@ -4,10 +4,10 @@ import Link from "next/link";
 
 export const ProductImages = () => {
     const photoar = [
-        "https://cdn.pixabay.com/photo/2015/10/02/15/59/olive-oil-968657_1280.jpg",
-        "https://cdn.pixabay.com/photo/2016/06/07/17/15/yogurt-1442034_640.jpg",
-        "https://cdn.pixabay.com/photo/2021/06/04/06/09/cherries-6308871_640.jpg",
-        "https://cdn.pixabay.com/photo/2017/07/16/22/22/bath-oil-2510783_640.jpg",
+        "https://m.media-amazon.com/images/I/81lIJ1udLXL.AC_UF1000,1000_QL80.jpg",
+        "https://m.media-amazon.com/images/I/61mwWhBFZiL.AC_UF1000,1000_QL80.jpg",
+        "https://kumaribasket.com/wp-content/uploads/2020/08/Banana-Palayankodan7.jpg",
+        "https://kumaribasket.com/wp-content/uploads/2020/08/Banana-Palayankodan1-1200x1308.jpg",
     ];
     return (
         <form

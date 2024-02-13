@@ -2,12 +2,33 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { ID, Client, Storage } from "appwrite";
+
+const saveImageToAppwrite = (image: File) => {
+    const client = new Client();
+    client.setEndpoint('https://cloud.appwrite.io/v1');
+    client.setProject('65c7525d9e76600783a5');
+
+    const storage = new Storage(client);
+    try {
+        const promise = storage.createFile(
+            '65c752846c06609469f5',
+            ID.unique(),
+            image // Pass the file data as an object
+        );
+         // Success
+         console.log(promise)
+    } catch (error) {
+        console.log(error)
+    }
+};
+
 
 export const GenerateImages = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File>();
     const updateFiles = () => {
-        console.log(inputRef.current?.files);
+        console.log(file);
         let temp = inputRef.current?.files as FileList;
         let ar = temp[0] as File;
         setFile(ar);
@@ -16,6 +37,8 @@ export const GenerateImages = () => {
         <form
             onSubmit={(e) => {
                 e.preventDefault();
+                // saveImageToAppwrite(file);
+                
             }}
             className="flex flex-col items-center justify-between gap-5 px-10 h-full w-full select-none"
         >
@@ -70,7 +93,7 @@ export const GenerateImages = () => {
 
             <Link
                 href={"/uploadproduct"}
-                onClick={() => file != undefined && saveImageTOAppwrite(file)}
+                // onClick={() => file != undefined && saveImageTOAppwrite(file)}
                 className="bg-[#18676d]/20 px-8 py-3 text-xl font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white"
             >
                 Generate Images
