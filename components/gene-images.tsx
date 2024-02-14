@@ -1,23 +1,37 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
-import { ID, Client, Storage } from "appwrite";
+import { ID, Client, Storage } from "appwrite";;
 
-const saveImageToAppwrite = (image: File) => {
+// Accessing environment variable on the client-side
+const storageId = process.env.NEXT_PUBLIC_APPWRITE_STORAGE_ID;
+const projectId = process.env.NEXT_PUBLIC_PROJECT_STORAGE_ID;
+
+const saveImageToAppwrite = async (image: File) => {
     const client = new Client();
     client.setEndpoint('https://cloud.appwrite.io/v1');
-    client.setProject('ProjectID');
+    client.setProject("#######ProjectID#########");
 
     const storage = new Storage(client);
     try {
-        const promise = storage.createFile(
-            '#StorageId',
+        const promise = await storage.createFile(
+            "#########StorageID############",
             ID.unique(),
             image // Pass the file data as an object
         );
          // Success
-         console.log(promise)
+         if (promise){
+             const fileUrl = storage.getFilePreview(
+                 "65c752846c06609469f5",
+                 promise.$id,
+              )
+             console.log(fileUrl)
+         }
+         const generate = fetch('https://image-recognition-2ginpapv2q-ue.a.run.app',{method:'POST'})
+          .then((response)=> response.json())
+          .catch((err)=>{console.log(err)})
+         
+          console.log(generate)
     } catch (error) {
         console.log(error)
     }
@@ -32,12 +46,12 @@ export const GenerateImages = () => {
         let temp = inputRef.current?.files as FileList;
         let ar = temp[0] as File;
         setFile(ar);
+        
     };
     return (
         <form
             onSubmit={(e) => {
                 e.preventDefault();
-                // saveImageToAppwrite(file);
                 
             }}
             className="flex flex-col items-center justify-between gap-5 px-10 h-full w-full select-none"
@@ -91,13 +105,12 @@ export const GenerateImages = () => {
                 {<span>{file?.name}</span>}
             </label>
 
-            <Link
-                href={"/uploadproduct"}
-                // onClick={() => file != undefined && saveImageTOAppwrite(file)}
+            <span
+                onClick={() => file != undefined && saveImageToAppwrite(file)}
                 className="bg-[#18676d]/20 px-8 py-3 text-xl font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white"
             >
                 Generate Images
-            </Link>
+            </span>
         </form>
     );
 };
