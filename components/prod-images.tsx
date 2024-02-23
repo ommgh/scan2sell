@@ -33,6 +33,7 @@ export const ProductImages = () => {
                             <div className="w-[154px] h-[154px] rounded-lg flex items-center justify-center overflow-hidden cursor-pointer outline outline-[3px] outline-transparent outline-offset-4 hover:outline-black peer-checked:outline-black">
                                 <img
                                     src={imgsrc}
+                                    loading="lazy"
                                     className="h-full object-cover"
                                 />
                             </div>
@@ -42,12 +43,15 @@ export const ProductImages = () => {
 
                 <span>or</span>
 
-                <Link href={"/product/generate-images"} className="bg-[#18676d]/20 px-6 py-2 text-lg font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white">
+                <Link
+                    href={"/product/generate-images"}
+                    className="bg-[#18676d]/20 px-6 py-2 text-lg font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white"
+                >
                     Generate Images
                 </Link>
             </div>
 
-            <div className="border-b-2 border-dashed border-black w-1/2"/>
+            <div className="border-b-2 border-dashed border-black w-1/2" />
             <button className="bg-[#18676d]/20 px-8 py-3 text-xl font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white">
                 Add your product
             </button>
