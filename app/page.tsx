@@ -1,7 +1,12 @@
-import { SignInButton } from "@clerk/nextjs";
+import { SignInButton, currentUser, useUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+    const user = await currentUser();
+    if (user) {
+        redirect("/product/uploadproduct");
+    }
     return (
         <main className="flex w-screen h-screen flex-col gap-5 items-center justify-center relative text-white">
             <div className="w-screen h-screen absolute top-0 left-0 flex items-center justify-center bg-black z-[-1] overflow-hidden">
@@ -18,7 +23,9 @@ export default function Home() {
                 </button>
             </SignInButton>
 
-			<Link href={'/sign-up'} className="font-medium">Don't have an account? Let's create one...</Link>
+            <Link href={"/sign-up"} className="font-medium">
+                Don't have an account? Let's create one...
+            </Link>
         </main>
     );
 }
