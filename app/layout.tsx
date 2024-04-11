@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
+import "@uploadthing/react/styles.css";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -21,7 +25,11 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en" suppressHydrationWarning>
-                <body className={poppins.className}>{children}</body>
+                <body className={poppins.className}>
+                <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}
+                />
+                    {children}
+                    </body>
             </html>
         </ClerkProvider>
     );

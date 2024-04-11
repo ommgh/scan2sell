@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.6",
+    "@uploadthing/react": "^6.4.4",
     "appwrite": "^13.0.1",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uploadthing": "^6.9.0"
   },
   "devDependencies": {
     "@types/node": "^20",
