@@ -1,8 +1,14 @@
 "use client";
+import React, { useEffect, useState } from 'react';
+import { generateImageWithAngles } from '@/app/api/images/generation';
+import { useProductContext } from '@/contexts/ProductContext';
+
 
 import Link from "next/link";
 
 export const ProductImages = () => {
+    const { productName } = useProductContext();
+    console.log('Product Name:', productName);
     const photoar = [
         "https://m.media-amazon.com/images/I/81lIJ1udLXL.AC_UF1000,1000_QL80.jpg",
         "https://m.media-amazon.com/images/I/61mwWhBFZiL.AC_UF1000,1000_QL80.jpg",

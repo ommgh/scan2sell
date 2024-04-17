@@ -10,7 +10,7 @@ export const ProductDetails = () => {
             </div>
             <div className="flex flex-col justify-center gap-[2px]">
                 <label className="text-lg font-semibold select-none">Name Product</label>
-                <input type="text" className="p-2 rounded-md bg-[#18676d]/20" />
+                <input type="text" className="p-2 rounded-md bg-[#18676d]/20"/>
             </div>
 
             <div className="flex flex-col justify-center gap-[2px]">

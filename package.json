@@ -12,12 +12,15 @@
     "@clerk/nextjs": "^4.29.6",
     "@uploadthing/react": "^6.4.4",
     "appwrite": "^13.0.1",
+    "axios": "^1.6.8",
+    "graceful-fs": "^4.2.11",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "uploadthing": "^6.9.0"
   },
   "devDependencies": {
+    "@types/graceful-fs": "^4.1.9",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
