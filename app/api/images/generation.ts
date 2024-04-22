@@ -9,7 +9,7 @@ interface GenerateImageResponse {
 export async function requestGenerateImages(objectName: string): Promise<string[]> {
   try {
     const response: AxiosResponse<GenerateImageResponse> = await axios.post<GenerateImageResponse>(
-      'http://localhost:8080/api/genimg',
+      'https://img-gen-hf-2ginpapv2q-el.a.run.app/api/genimg',
       { objectName },
       { timeout: 60000 } // Timeout set to 60 seconds (adjust as needed)
     );
