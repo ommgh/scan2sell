@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useProductContext } from '@/contexts/ProductContext';
 import { requestGenerateImages } from '@/app/api/images/generation';
+import { prodLink } from '@/app/store/atoms/fileUrl';
 
 import Link from 'next/link';
+import { useRecoilValue } from 'recoil';
 
 export const ProductImages = () => {
-  const  objectName  = "Truck";
+  const prodName = useRecoilValue(prodLink);
+  console.log('Product Name:', prodName);
+  const  objectName  = {prodName};
   const [photoar, setPhotoar] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  
 
   const fetchImages = async () => {
     setLoading(true);
     console.log('Fetching images...');
     try {
-      const imageUrls = await requestGenerateImages(objectName);
+      const imageUrls = await requestGenerateImages(prodName);
       console.log('Image URLs:', imageUrls);
       setPhotoar(imageUrls.slice(0, 4)); // Assuming the API returns more than 4 image URLs
       setError('');

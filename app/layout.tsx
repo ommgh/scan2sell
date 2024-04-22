@@ -6,6 +6,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import "@uploadthing/react/styles.css";
+import { Providers } from "./providers";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -25,11 +26,13 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en" suppressHydrationWarning>
-                <body className={poppins.className}>
-                <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}
-                />
-                    {children}
+                <Providers>
+                    <body className={poppins.className}>
+                    <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}
+                    />
+                        {children}
                     </body>
+                    </Providers>
             </html>
         </ClerkProvider>
     );

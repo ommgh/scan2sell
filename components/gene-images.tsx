@@ -6,18 +6,25 @@ import { UploadDropzone } from "@/utils/uploadthing";
 import { recognizeImage } from "@/app/api/images/recognition";
 import { ClientUploadedFileData } from "uploadthing/types";
 import { ProductProvider, useProductContext } from "@/contexts/ProductContext";
+import { useSetRecoilState } from "recoil";
+import { prodLink } from "@/app/store/atoms/fileUrl";
 
 
 export const GenerateImages = () => {
+
     
     const { productName, setProductName } = useProductContext();
     const [file, setFile] = useState<string>('');
+    const setProdName = useSetRecoilState(prodLink);
 
     async function handleImageRecognition(file: string) {
         const recognitionResult = await recognizeImage(file);
         if (recognitionResult) {
             console.log('Label:', recognitionResult.label);
             setProductName(recognitionResult.label);
+            setProdName(recognitionResult.label);
+            
+            
             
         } else {
             console.log('Image recognition failed.');
