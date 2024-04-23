@@ -2,6 +2,7 @@
 import { ProductDetails } from "@/components/prod-details";
 import { ProductImages } from "@/components/prod-images";
 import { ProductProvider } from "@/contexts/ProductContext";
+import Modal from "@/components/Modal";
 
 
 export default function Page() {
@@ -12,6 +13,8 @@ export default function Page() {
             <ProductDetails />
             <ProductImages />
             </ProductProvider>
+
+           
         </main>
     );
 }

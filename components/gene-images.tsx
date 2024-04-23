@@ -6,8 +6,10 @@ import { UploadDropzone } from "@/utils/uploadthing";
 import { recognizeImage } from "@/app/api/images/recognition";
 import { ClientUploadedFileData } from "uploadthing/types";
 import { ProductProvider, useProductContext } from "@/contexts/ProductContext";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { prodLink } from "@/app/store/atoms/fileUrl";
+import Modal from "./Modal";
+import { barcodeUrl } from "@/app/store/atoms/fileUrl";
 
 
 export const GenerateImages = () => {
@@ -16,6 +18,7 @@ export const GenerateImages = () => {
     const { productName, setProductName } = useProductContext();
     const [file, setFile] = useState<string>('');
     const setProdName = useSetRecoilState(prodLink);
+    const setBarcodeUrl = useSetRecoilState(barcodeUrl);
 
     async function handleImageRecognition(file: string) {
         const recognitionResult = await recognizeImage(file);
@@ -55,6 +58,7 @@ export const GenerateImages = () => {
                         />
                         <div className="bg-[#18676d]/20 px-6 py-2 text-lg font-semibold rounded-lg transition-colors hover:bg-[#18676d] hover:text-white peer-checked:bg-[#18676d] peer-checked:text-white">
                             Barcode
+                            <Modal/>
                         </div>
                     </label>
 
@@ -111,6 +115,7 @@ export const GenerateImages = () => {
                 onClientUploadComplete={(res: ClientUploadedFileData<{ uploadedBy: string; }>[]) => {
                     // Do something with the response
                     setFile(res[0]?.url || '');
+                    setBarcodeUrl(res[0]?.url || '');
                     console.log("Files: ", res);
                     alert("Upload Completed");
                 }}
