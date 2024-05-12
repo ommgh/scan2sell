@@ -21,7 +21,7 @@ export const ProductImages = () => {
     try {
       const imageUrls = await requestGenerateImages(prodName);
       console.log('Image URLs:', imageUrls);
-      setPhotoar(imageUrls.slice(0, 4)); // Assuming the API returns more than 4 image URLs
+      setPhotoar(imageUrls.slice(0, 4));
       setError('');
     } catch (error) {
       console.error('Error fetching images:', error);
